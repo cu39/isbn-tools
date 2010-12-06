@@ -20,6 +20,8 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		isbn_2_13 = "979-1-56619-909-3" # same as isbn_1_13 but altered with 979 and valid cksum
 		isbn_3_10 = "2-930088-49-4" #unusually small (?) editor: good for hyphen testing!
 
+    isbn_84_13 = "978-84-252-2362-4"
+
 		isbn_4_10 = "4413008480" # japanese ISBN (I think, ... At least, it validates.)
 
 		isbn = ""
@@ -79,6 +81,7 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		assert_equal(nil, ISBN_Tools.hyphenate_isbn10(isbn_orig_bad))
 		# on isbn 13
 		assert_equal(isbn_1_13,ISBN_Tools.hyphenate_isbn13(isbn_1_13))
+		assert_equal(isbn_84_13, ISBN_Tools.hyphenate_isbn13(isbn_84_13))
 		# same result with cleanup up one
 		assert_equal(isbn_1_13,ISBN_Tools.hyphenate_isbn13(ISBN_Tools.cleanup(isbn_1_13)))
 		# check the generic method
