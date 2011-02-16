@@ -66,7 +66,7 @@ module ISBN_Tools
 		isbn = cleanup(isbn_)
 		return false if isbn.nil? or isbn.match(/^[0-9]{9}[0-9X]$/).nil?
 		sum = 0;
-		0.upto(9) { |ndx| sum += (isbn[ndx]!= 88 ? isbn[ndx].chr.to_i : 10) * (10-ndx) } # 88 is ascii of X
+		0.upto(9) { |ndx| sum += (isbn[ndx].unpack('C*')[0]!= 88 ? isbn[ndx].chr.to_i : 10) * (10-ndx) } # 88 is ascii of X
 		sum % 11 == 0
 	end
 
