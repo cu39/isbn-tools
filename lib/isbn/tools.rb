@@ -9,7 +9,7 @@
 # furnished to do so, subject to the following conditions:
 # 
 # * The name of the author may not be used to endorse or promote products derived
-# 	from this software without specific prior written permission.
+#   from this software without specific prior written permission.
 # 
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
@@ -151,15 +151,15 @@ module ISBN_Tools
 	def ISBN_Tools.hyphenate_isbn13(isbn_)
 		isbn = cleanup(isbn_)
 		if is_valid_isbn13?(isbn)
-      hyphened_isbn = isbn
-      [2, 1, 0].each do |i|
-        group = isbn[3..(3+i)]
-        if RNG.has_key?(group)
-          RNG[group].each { |r|
-            hyphened_isbn.sub!(Regexp.new("(.{3})(.{#{group.size}})(.{#{r.last.length}})(.{#{(9-group.size)-r.last.length}})(.)"),'\1-\2-\3-\4-\5') if r.member?(isbn[1..r.last.length]) }
-          return hyphened_isbn
-        end
-      end
+			hyphened_isbn = isbn
+			[2, 1, 0].each do |i|
+				group = isbn[3..(3+i)]
+				if RNG.has_key?(group)
+					RNG[group].each { |r|
+					hyphened_isbn.sub!(Regexp.new("(.{3})(.{#{group.size}})(.{#{r.last.length}})(.{#{(9-group.size)-r.last.length}})(.)"),'\1-\2-\3-\4-\5') if r.member?(isbn[1..r.last.length]) }
+					return hyphened_isbn
+				end
+			end
 		end
 	end
 
