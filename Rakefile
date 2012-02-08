@@ -9,7 +9,7 @@ begin
     gemspec.description = "Validate, convert and hyphenation of ISBN numbers"
     gemspec.email = ""
     gemspec.homepage = "http://isbn-tools.rubyforge.org"
-    gemspec.authors = ["Kosuke Tanabe"]
+    gemspec.authors = ["Mike Ragalie (regalie)", "David Arango (demimismo)", "Kosuke Tanabe (nabeta)", "Shusaku NAKAZATO (cu39)"]
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
