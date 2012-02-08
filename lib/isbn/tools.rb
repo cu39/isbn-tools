@@ -66,7 +66,7 @@ module ISBN_Tools
 		isbn = cleanup(isbn_)
 		return false if isbn.nil? or isbn.match(/^[0-9]{9}[0-9X]$/).nil?
 		sum = 0;
-		0.upto(9) { |ndx| sum += (isbn[ndx]!= 88 ? isbn[ndx].chr.to_i : 10) * (10-ndx) } # 88 is ascii of X
+		0.upto(9) { |ndx| sum += (isbn[ndx][0].ord != 88 ? isbn[ndx].chr.to_i : 10) * (10-ndx) } # 88 is ascii of X
 		sum % 11 == 0
 	end
 
@@ -147,14 +147,19 @@ module ISBN_Tools
 	end
 
 	# Hyphenate a valid ISBN-13 number.  Returns nil if the number is invalid or if the group range is 
-	# unknown.   Works only for groups 0,1 and 2.
+	# unknown. Works only for groups 0, 1, 2 and 84.
 	def ISBN_Tools.hyphenate_isbn13(isbn_)
 		isbn = cleanup(isbn_)
 		if is_valid_isbn13?(isbn)
-			group = isbn[3..3]
-			if RNG.has_key?(group)
-				RNG[group].each { |r| return isbn.sub(Regexp.new("(.{3})(.{1})(.{#{r.last.length}})(.{#{8-r.last.length}})(.)"),'\1-\2-\3-\4-\5') if r.member?(isbn[4..(r.last.length + 3)]) }
-			end
+      hyphened_isbn = isbn
+      [2, 1, 0].each do |i|
+        group = isbn[3..(3+i)]
+        if RNG.has_key?(group)
+          RNG[group].each { |r|
+            hyphened_isbn.sub!(Regexp.new("(.{3})(.{#{group.size}})(.{#{r.last.length}})(.{#{(9-group.size)-r.last.length}})(.)"),'\1-\2-\3-\4-\5') if r.member?(isbn[1..r.last.length]) }
+          return hyphened_isbn
+        end
+      end
 		end
 	end
 

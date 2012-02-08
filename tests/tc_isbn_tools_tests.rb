@@ -24,6 +24,8 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		isbn_4_13 = "978-4-413-00848-8"
 		isbn_5_10 = "3-518-10012-2" # German ISBN: Tractatus logico-philosophicus by Lutwig Wittgenstein.
 		isbn_5_13 = "978-3-518-10012-7"
+		isbn_84_13 = "978-84-252-2362-4"
+
 		isbn = ""
 
 		# check that cleanup works
@@ -81,6 +83,7 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		assert_equal(nil, ISBN_Tools.hyphenate_isbn10(isbn_orig_bad))
 		# on isbn 13
 		assert_equal(isbn_1_13,ISBN_Tools.hyphenate_isbn13(isbn_1_13))
+		assert_equal(isbn_84_13, ISBN_Tools.hyphenate_isbn13(isbn_84_13))
 		# same result with cleanup up one
 		assert_equal(isbn_1_13,ISBN_Tools.hyphenate_isbn13(ISBN_Tools.cleanup(isbn_1_13)))
 		# check the generic method
