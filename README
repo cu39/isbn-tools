@@ -6,7 +6,7 @@ check if they are valid and convert from one format to the other.
 It can, of course, compute the check digit of both formats.
 
 Finally, it has the ability to hyphenate ISBN numbers for the
-following group identifiers: 0, 1 and 2.  Note that only hyphenation
+following group identifiers: 0, 1, 2 and 4.  Note that only hyphenation
 methods need to know about ranges, so all others methods (validity, 
 checksum computations and number conversions) can be used with ISBN 
 numbers from any group.

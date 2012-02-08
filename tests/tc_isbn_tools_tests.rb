@@ -20,8 +20,10 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		isbn_2_13 = "979-1-56619-909-3" # same as isbn_1_13 but altered with 979 and valid cksum
 		isbn_3_10 = "2-930088-49-4" #unusually small (?) editor: good for hyphen testing!
 
-		isbn_4_10 = "4413008480" # japanese ISBN (I think, ... At least, it validates.)
-
+		isbn_4_10 = "4-413-00848-0" # Japanese ISBN: Asu No Shin-wa by Taro OKAMOTO.
+		isbn_4_13 = "978-4-413-00848-8"
+		isbn_5_10 = "3-518-10012-2" # German ISBN: Tractatus logico-philosophicus by Lutwig Wittgenstein.
+		isbn_5_13 = "978-3-518-10012-7"
 		isbn = ""
 
 		# check that cleanup works
@@ -72,9 +74,9 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		assert_equal(isbn_orig_ok, ISBN_Tools.hyphenate_isbn10(isbn_orig_ok))
 		assert_equal(isbn_1_10, ISBN_Tools.hyphenate_isbn10(isbn_1_10))
 		assert_equal(isbn_3_10, ISBN_Tools.hyphenate_isbn10(isbn_3_10))
-		assert_equal(isbn_3_10, ISBN_Tools.hyphenate_isbn10(isbn_3_10))
-		# fail on hyphenating a non group 0/1/2 ISBN
-		assert_equal(nil, ISBN_Tools.hyphenate_isbn10(isbn_4_10))
+		assert_equal(isbn_4_10, ISBN_Tools.hyphenate_isbn10(isbn_4_10))
+		# fail on hyphenating a non group 0/1/2/4 ISBN
+		assert_equal(nil, ISBN_Tools.hyphenate_isbn10(isbn_5_10))
 		# fail on hyphenating an invalid isbn
 		assert_equal(nil, ISBN_Tools.hyphenate_isbn10(isbn_orig_bad))
 		# on isbn 13
@@ -84,7 +86,10 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		# check the generic method
 		assert_equal(isbn_1_13,ISBN_Tools.hyphenate(isbn_1_13))
 		assert_equal(isbn_1_10, ISBN_Tools.hyphenate(isbn_1_10))
-		assert_equal(nil, ISBN_Tools.hyphenate(isbn_4_10))
+		assert_equal(isbn_4_13, ISBN_Tools.hyphenate(isbn_4_13))
+		assert_equal(isbn_4_10, ISBN_Tools.hyphenate(isbn_4_10))
+		assert_equal(nil, ISBN_Tools.hyphenate(isbn_5_13))
+		assert_equal(nil, ISBN_Tools.hyphenate(isbn_5_10))
 		# check that hyphenate! alters the argument
 		isbn.replace(isbn_1_10)
 		ISBN_Tools.cleanup!(isbn)

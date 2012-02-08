@@ -1,5 +1,5 @@
 == TODO list
-- Handle groups which number of digit is > 1
+- Handle groups which number of digit is 3 or > 5
 - Add all known ranges for all groups
 - Proof read comments
 - Add samples to comments
