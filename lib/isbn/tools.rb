@@ -156,10 +156,12 @@ module ISBN_Tools
 				group = isbn[3..(3+i)]
 				if RNG.has_key?(group)
 					RNG[group].each { |r|
-					hyphened_isbn.sub!(Regexp.new("(.{3})(.{#{group.size}})(.{#{r.last.length}})(.{#{(9-group.size)-r.last.length}})(.)"),'\1-\2-\3-\4-\5') if r.member?(isbn[1..r.last.length]) }
+						hyphened_isbn.sub!(Regexp.new("(.{3})(.{#{group.size}})(.{#{r.last.length}})(.{#{(9-group.size)-r.last.length}})(.)"),'\1-\2-\3-\4-\5') if r.member?(isbn[(3+group.size)..(3+group.size+r.last.length)])
+					}
 					return hyphened_isbn
 				end
 			end
+			return nil
 		end
 	end
 
