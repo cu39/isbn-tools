@@ -24,6 +24,7 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		isbn_4_13 = "978-4-413-00848-8"
 		isbn_5_10 = "3-518-10012-2" # German ISBN: Tractatus logico-philosophicus by Lutwig Wittgenstein.
 		isbn_5_13 = "978-3-518-10012-7"
+		isbn_84_10 = "84-252-2362-8"
 		isbn_84_13 = "978-84-252-2362-4"
 
 		isbn = ""
@@ -77,6 +78,7 @@ class TC_ISBN_Tools_Tests < Test::Unit::TestCase
 		assert_equal(isbn_1_10, ISBN_Tools.hyphenate_isbn10(isbn_1_10))
 		assert_equal(isbn_3_10, ISBN_Tools.hyphenate_isbn10(isbn_3_10))
 		assert_equal(isbn_4_10, ISBN_Tools.hyphenate_isbn10(isbn_4_10))
+		assert_equal(isbn_84_10, ISBN_Tools.hyphenate_isbn10(isbn_84_10))
 		# fail on hyphenating a non group 0/1/2/4 ISBN
 		assert_equal(nil, ISBN_Tools.hyphenate_isbn10(isbn_5_10))
 		# fail on hyphenating an invalid isbn
